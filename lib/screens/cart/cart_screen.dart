@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Cart App"),
-      bottomNavigationBar:  BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: SizedBox(
           height: 70,
@@ -75,80 +75,87 @@ class CartScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                CardProductCard(product: Product.products[0]),
-                CardProductCard(product: Product.products[0]),
-                CardProductCard(product: Product.products[0]),
+                SizedBox(
+                  height: 355,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: Cart().products.length,
+                      itemBuilder: (context, index) {
+                    return CardProductCard(product: Cart().products[index]);
+
+                      }),
+                ),
               ],
             ),
-
             Column(
               children: [
-              const Divider(
-                thickness: 2,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "SUBTOTAL",
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        Text(
-                          "\E\G 132",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
-                  ],
+                const Divider(
+                  thickness: 2,
                 ),
-              ),
-              Stack(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withAlpha(50),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.all(5),
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Row(
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                  child: Column(
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "TOTAL",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .copyWith(color: Colors.white),
+                            "SUBTOTAL",
+                            style: Theme.of(context).textTheme.headline6,
                           ),
                           Text(
-                            "\E\G 132",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(color: Colors.white),
+                            "\E\G ${Cart().subtotalString}",
+                            style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ],),
-
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withAlpha(50),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.all(5),
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "TOTAL",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              "\E\G ${Cart().totalString}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),
