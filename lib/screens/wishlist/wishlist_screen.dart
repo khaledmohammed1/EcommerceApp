@@ -1,5 +1,5 @@
-import 'package:customer_ecommerce_app/blocs/wishlist_bloc.dart';
-import 'package:customer_ecommerce_app/blocs/wishlist_state.dart';
+import 'package:customer_ecommerce_app/blocs/wishList/wishlist_bloc.dart';
+import 'package:customer_ecommerce_app/blocs/wishList/wishlist_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

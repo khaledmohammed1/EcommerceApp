@@ -1,4 +1,8 @@
+import 'package:customer_ecommerce_app/blocs/cart/cart_bloc.dart';
+import 'package:customer_ecommerce_app/blocs/cart/cart_event.dart';
+import 'package:customer_ecommerce_app/blocs/cart/cart_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/models.dart';
 
@@ -41,7 +45,7 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 85,
-            left: isWishList?leftPosition + 50:leftPosition - 5,
+            left: isWishList ? leftPosition + 50 : leftPosition - 5,
             child: Container(
               width: MediaQuery.of(context).size.width / widthFactor,
               height: 60,
@@ -49,8 +53,8 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: isWishList?86:80,
-            left: isWishList?leftPosition + 50:leftPosition + 5,
+            top: isWishList ? 86 : 80,
+            left: isWishList ? leftPosition + 50 : leftPosition + 5,
             right: leftPosition + 4,
             child: Container(
               width: MediaQuery.of(context).size.width / widthFactor -
@@ -79,24 +83,50 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  isWishList?SizedBox(width: MediaQuery.of(context).size.width*.05,):const SizedBox(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.add_circle,
-                      color: Colors.white,
-                      size: 20,
-                    ),
+                  isWishList
+                      ? SizedBox(
+                          width: MediaQuery.of(context).size.width * .05,
+                        )
+                      : const SizedBox(),
+                  BlocBuilder<CartBloc, CartState>(
+                    builder: (context, state) {
+                      if(state is CartLoading){
+                        return const Center(
+                          child: CircularProgressIndicator(color: Colors.white,),
+                        );
+                      }
+                      if(state is CartLoaded) {
+                        return Expanded(
+                          child: IconButton(
+                            onPressed: () {
+                              context.read<CartBloc>().add(CartProductAdded(product));
+                            },
+                            icon: const Icon(
+                              Icons.add_circle,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        );
+                      }
+                      else{
+                        return const Text("Something went wrong.");
+                      }
+                    },
                   ),
-                  isWishList?
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ):const SizedBox()
+                  isWishList
+                      ? Expanded(
+                        child: IconButton(
+                            onPressed: () {
+                            },
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                      )
+                      : const SizedBox()
                 ],
               ),
             ),

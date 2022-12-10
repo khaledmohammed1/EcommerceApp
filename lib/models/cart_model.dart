@@ -3,10 +3,11 @@ import 'package:equatable/equatable.dart';
 import 'models.dart';
 
 class Cart extends Equatable{
-  Cart();
+  final List<Product> products;
+  const Cart({this.products = const <Product>[]});
 
   double get subtotal => products.fold(0, (total, current) => total + current.price);
-  double get total => subtotal + 20;
+  double get total => subtotal == 0 ? subtotal :subtotal + 20;
 
   double deliveryFee(subtotal) {
     if(subtotal >= 100.0){
@@ -20,35 +21,7 @@ class Cart extends Equatable{
   String get totalString => total.toStringAsFixed(2);
 
 
-
-  List<Product> products = [
-    Product(
-        name: "product1 ",
-        category: "category 1",
-        imageUrl:
-        "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80",
-        price: 10,
-        isRecommended: true,
-        isPopular: true),
-    Product(
-        name: "product3 ",
-        category: "category 3",
-        imageUrl:
-        "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80",
-        price: 30.0,
-        isRecommended: true,
-        isPopular: true),
-    Product(
-        name: "product2 ",
-        category: "category 2",
-        imageUrl:
-        "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80",
-        price: 20.0,
-        isRecommended: false,
-        isPopular: false)
-  ];
-
   @override
   // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props => [products];
 }
