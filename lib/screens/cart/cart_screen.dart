@@ -1,6 +1,5 @@
 import 'package:customer_ecommerce_app/blocs/cart/cart_bloc.dart';
 import 'package:customer_ecommerce_app/blocs/cart/cart_state.dart';
-import 'package:customer_ecommerce_app/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -95,6 +94,7 @@ class CartScreen extends StatelessWidget {
                               itemCount: state.cart.products.length,
                               itemBuilder: (context, index) {
                                 return CardProductCard(
+                                     quantity: 1,
                                     product: state.cart.products[index]);
                               }),
                         ),
