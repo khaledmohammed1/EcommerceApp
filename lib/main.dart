@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: "Buyer App",
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: SplashScreen.routeName,
+        initialRoute: SellerHomeScreen.routeName,
       ),
     );
   }

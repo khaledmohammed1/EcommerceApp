@@ -7,3 +7,4 @@ export 'splash/splash_screen.dart';
 export 'control/control_screen.dart';
 export 'profile/profile_screen.dart';
 export 'seller_home/seller_home_screen.dart';
+export 'seller_product/seller_product_screen.dart';
